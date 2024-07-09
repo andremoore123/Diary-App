@@ -8,7 +8,6 @@ object NoteMapper {
         description = q.description,
         isNotify = q.isNotify,
         date = q.date,
-        category = q.category,
         isDone = q.isDone
     )
 
@@ -18,7 +17,6 @@ object NoteMapper {
         description = q.description,
         isNotify = q.isNotify,
         date = q.date,
-        category = q.category,
         isDone = q.isDone
     )
 }

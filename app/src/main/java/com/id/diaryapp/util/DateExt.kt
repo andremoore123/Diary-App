@@ -13,3 +13,12 @@ fun Long.toFormattedDate(): String {
     // Format the date and return the result
     return dateFormat.format(date)
 }
+
+fun Long.toFormattedDateWithYear(): String {
+    // Create a Date object from the Long value
+    val date = Date(this)
+    // Define the date format
+    val dateFormat = SimpleDateFormat("dd MM YYYY", Locale.getDefault())
+    // Format the date and return the result
+    return dateFormat.format(date)
+}

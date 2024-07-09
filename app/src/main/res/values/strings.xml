@@ -2,4 +2,10 @@
     <string name="app_name">Diary App</string>
     <string name="text_home">Home</string>
     <string name="text_completed">Completed</string>
+    <string name="text_add_note">Add Note</string>
+    <string name="text_title">Title</string>
+    <string name="text_description">Description</string>
+    <string name="text_date">Date</string>
+    <string name="text_notify">Notify?</string>
+    <string name="text_cancel">Cancel</string>
 </resources>
