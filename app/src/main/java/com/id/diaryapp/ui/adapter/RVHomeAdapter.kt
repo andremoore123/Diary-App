@@ -8,8 +8,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewbinding.ViewBinding
 import com.id.diaryapp.databinding.RvHomeNoteItemBinding
 import com.id.diaryapp.domain.NoteModel
+import com.id.diaryapp.util.toFormattedDate
 
-class RVHomeAdapter: Adapter<RVHomeAdapter.RVHomeViewHolder>() {
+class RVHomeAdapter(
+    private val onCheckClick: (NoteModel) -> Unit,
+    private val onDetailClick: (NoteModel) -> Unit
+): Adapter<RVHomeAdapter.RVHomeViewHolder>() {
     private val noteList = mutableListOf<NoteModel>()
 
     inner class RVHomeViewHolder(val binding: RvHomeNoteItemBinding): ViewHolder(binding.root)
@@ -32,6 +36,15 @@ class RVHomeAdapter: Adapter<RVHomeAdapter.RVHomeViewHolder>() {
             rvhTvTitle.text = item.title
             rvhTvDesc.text = item.description
             rvhCbDone.isChecked = item.isDone
+            rvhTvDate.text = item.date.toFormattedDate()
+
+            rvhCbDone.setOnClickListener {
+                onCheckClick(item)
+            }
+
+            root.setOnClickListener {
+                onDetailClick(item)
+            }
         }
     }
 }

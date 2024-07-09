@@ -4,6 +4,7 @@ import com.id.diaryapp.domain.NoteModel
 
 object NoteMapper {
     fun noteModelToEntity(q: NoteModel) = NoteEntity(
+        id = q.id,
         title = q.title,
         description = q.description,
         isNotify = q.isNotify,

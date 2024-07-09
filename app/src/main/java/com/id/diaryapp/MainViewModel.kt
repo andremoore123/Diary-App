@@ -28,4 +28,15 @@ class MainViewModel(
             repository.addNote(noteModel)
         }
     }
+
+    fun updateNoteStatus(
+        noteModel: NoteModel
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val newNote = noteModel.copy(
+                isDone = !noteModel.isDone
+            )
+            repository.updateDoneStatus(newNote)
+        }
+    }
 }
