@@ -11,5 +11,6 @@ data class NoteEntity(
     val description: String,
     val isNotify: Boolean,
     val date: Long,
-    val category: String
+    val category: String,
+    val isDone: Boolean = false
 )

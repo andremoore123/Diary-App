@@ -6,4 +6,21 @@
     </style>
 
     <style name="Theme.DiaryApp" parent="Base.Theme.DiaryApp" />
+
+    <style name="TextAppearance.M3.Sys.Typescale.BodySmall." parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextAppearance.M3.Sys.Typescale.TitleSmall." parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.M3.Sys.Typescale.TitleMedium." parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
 </resources>

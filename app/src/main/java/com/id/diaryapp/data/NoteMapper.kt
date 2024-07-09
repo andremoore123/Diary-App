@@ -8,7 +8,8 @@ object NoteMapper {
         description = q.description,
         isNotify = q.isNotify,
         date = q.date,
-        category = q.category
+        category = q.category,
+        isDone = q.isDone
     )
 
     fun noteEntityToModel(q: NoteEntity) = NoteModel(
@@ -17,6 +18,7 @@ object NoteMapper {
         description = q.description,
         isNotify = q.isNotify,
         date = q.date,
-        category = q.category
+        category = q.category,
+        isDone = q.isDone
     )
 }

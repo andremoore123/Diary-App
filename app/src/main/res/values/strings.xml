@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Diary App</string>
+    <string name="text_home">Home</string>
+    <string name="text_completed">Completed</string>
 </resources>
