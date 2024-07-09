@@ -1,18 +1,18 @@
 package com.id.diaryapp.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import androidx.viewbinding.ViewBinding
 import com.id.diaryapp.databinding.RvHomeNoteItemBinding
 import com.id.diaryapp.domain.NoteModel
 import com.id.diaryapp.util.toFormattedDate
 
 class RVHomeAdapter(
     private val onCheckClick: (NoteModel) -> Unit,
-    private val onDetailClick: (NoteModel) -> Unit
+    private val onDetailClick: (NoteModel) -> Unit,
+    private val handleOnEmptyList: () -> Unit = {},
+    private val handleOnSuccess: () -> Unit = {}
 ): Adapter<RVHomeAdapter.RVHomeViewHolder>() {
     private val noteList = mutableListOf<NoteModel>()
 
@@ -26,6 +26,11 @@ class RVHomeAdapter(
     fun submitData(data: List<NoteModel>) {
         noteList.clear()
         noteList.addAll(data)
+        if (data.isEmpty()) {
+            handleOnEmptyList()
+        } else {
+            handleOnSuccess()
+        }
         notifyDataSetChanged()
     }
 

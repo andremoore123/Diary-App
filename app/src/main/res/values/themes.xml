@@ -22,9 +22,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.M3.Sys.Typescale.TitleLarge.." parent="TextAppearance.Material3.TitleLarge">
+    <style name="TextAppearance.M3.Sys.Typescale.TitleLarge." parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.M3.Sys.Typescale.BodyLarge." parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">18sp</item>
     </style>
 
 </resources>

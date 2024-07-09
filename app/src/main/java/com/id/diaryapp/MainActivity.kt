@@ -12,6 +12,8 @@ import com.id.diaryapp.domain.NoteModel
 import com.id.diaryapp.ui.adapter.RVHomeAdapter
 import com.id.diaryapp.ui.dialog.AddNoteDialog
 import com.id.diaryapp.ui.dialog.UpdateNoteDialog
+import com.id.diaryapp.util.gone
+import com.id.diaryapp.util.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.scope.AndroidScopeComponent
@@ -46,6 +48,12 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
             },
             onDetailClick = {
                 onItemClick(it)
+            },
+            handleOnEmptyList = {
+                handleEmptyState()
+            },
+            handleOnSuccess = {
+                handleSuccessState()
             }
         )
         with(binding) {
@@ -53,20 +61,83 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
                 adapter = rvAdapter
                 layoutManager = LinearLayoutManager(this@MainActivity)
             }
+
+            amMtToolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.show_all -> {
+                        viewModel.setFilter(Filter.NoFilter)
+                        true
+                    }
+
+                    R.id.show_unfinished -> {
+                        viewModel.setFilter(Filter.UnfinishedFilter)
+                        true
+                    }
+
+                    R.id.show_finished -> {
+                        viewModel.setFilter(Filter.FinishedFilter)
+                        true
+                    }
+
+                    else -> false
+                }
+            }
         }
     }
 
     private fun observeData() {
         lifecycleScope.launch(Dispatchers.Main) {
-            viewModel.listNote.collect {
-                rvAdapter.submitData(it)
+            viewModel.listNote.collect { list ->
+                viewModel.filter.observe(this@MainActivity) { filter ->
+                    handleTitleAndDesc(filter)
+                    when (filter) {
+                        Filter.NoFilter -> {
+                            rvAdapter.submitData(list)
+                        }
+
+                        Filter.FinishedFilter -> {
+                            rvAdapter.submitData(list.filter {
+                                it.isDone
+                            })
+                        }
+
+                        Filter.UnfinishedFilter -> {
+                            rvAdapter.submitData(list.filterNot {
+                                it.isDone
+                            })
+                        }
+                    }
+                }
             }
+        }
+    }
+
+    private fun handleTitleAndDesc(filter: Filter) {
+        with(binding) {
+            amTvTitle.text = resources.getString(filter.title)
+            amTvDesc.text = resources.getString(filter.desc)
         }
     }
 
     private fun initListener() {
         binding.amFaAdd.setOnClickListener {
             onAddButtonClick()
+        }
+    }
+
+    private fun handleEmptyState() {
+        with(binding) {
+            amRvNotes.gone()
+            amTvDesc.gone()
+            amTvEmptyState.visible()
+        }
+    }
+
+    private fun handleSuccessState() {
+        with(binding) {
+            amRvNotes.visible()
+            amTvDesc.visible()
+            amTvEmptyState.gone()
         }
     }
 

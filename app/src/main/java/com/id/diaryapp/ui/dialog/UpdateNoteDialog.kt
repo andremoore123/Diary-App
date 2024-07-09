@@ -23,7 +23,7 @@ class UpdateNoteDialog(
         .setSelection(note.date)
         .build()
 
-    private var selectedDate: Long? = null
+    private var selectedDate: Long? = note.date
 
     override fun initView() {
         with(binding) {
@@ -67,8 +67,10 @@ class UpdateNoteDialog(
 
     private fun handleDatePicker() {
         datePicker.show(supportFragment, "TAG")
-        selectedDate = datePicker.selection
-        binding.unEtDate.setText(datePicker.selection?.toFormattedDateWithYear())
+        datePicker.addOnPositiveButtonClickListener { date ->
+            selectedDate = date
+            binding.unEtDate.setText(date.toFormattedDateWithYear())
+        }
     }
 
     private fun validator(title: String, desc: String, time: Long?): Boolean {

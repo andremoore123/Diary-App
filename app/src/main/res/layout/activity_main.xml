@@ -15,8 +15,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/am_mt_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:menu="@menu/bar_main_menu"
             app:title="@string/app_name" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notes Still Empty"/>
+        android:text="This Page is Empty" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/am_fa_add"
@@ -40,14 +42,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/am_tv_title"
+        style="@style/TextAppearance.M3.Sys.Typescale.TitleLarge."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        tools:text="@string/title_no_filter" />
+
+    <TextView
+        android:id="@+id/am_tv_desc"
+        style="@style/TextAppearance.M3.Sys.Typescale.BodyLarge."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/am_tv_title"
+        tools:text="@string/desc_no_filter" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/am_rv_notes"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/am_tv_desc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
