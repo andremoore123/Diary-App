@@ -1,9 +1,12 @@
 package com.id.diaryapp.data
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface NoteDao {
     @Query("Select * from noteentity")
     fun fetchNotes(): Flow<List<NoteEntity>>
@@ -19,4 +22,7 @@ interface NoteDao {
 
     @Query("Select * from noteentity where isNotify = 1")
     fun fetchNeedToNotifyNotes(): Flow<List<NoteEntity>>
+
+    @Update
+    suspend fun updateNote(note: NoteEntity)
 }

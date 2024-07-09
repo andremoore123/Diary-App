@@ -6,7 +6,6 @@ import com.id.diaryapp.domain.INoteRepository
 import com.id.diaryapp.domain.NoteModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapNotNull
 
 class NoteRepository(
     private val database: AppDatabase
@@ -33,4 +32,8 @@ class NoteRepository(
     )
 
     override suspend fun removeNote(id: Int) = noteDao.deleteNoteById(id)
+    override suspend fun updateNote(note: NoteModel) {
+        val noteEntity = noteModelToEntity(note)
+        noteDao.updateNote(noteEntity)
+    }
 }

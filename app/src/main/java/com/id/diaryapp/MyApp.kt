@@ -1,6 +1,7 @@
 package com.id.diaryapp
 
 import android.app.Application
+import com.id.diaryapp.di.AppModule
 import com.id.diaryapp.di.DatabaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -13,6 +14,7 @@ class MyApp: Application() {
             androidLogger()
             androidContext(this@MyApp)
             modules(DatabaseModule.getModule())
+            modules(AppModule.getModules())
         }
     }
 }

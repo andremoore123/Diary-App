@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Diary App</string>
+    <string name="text_home">Home</string>
+    <string name="text_completed">Completed</string>
+    <string name="text_add_note">Add Note</string>
+    <string name="text_title">Title</string>
+    <string name="text_description">Description</string>
+    <string name="text_date">Date</string>
+    <string name="text_notify">Notify?</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_delete">Delete</string>
+    <string name="text_update">Update</string>
+    <string name="txt_show_all">Show All</string>
+    <string name="text_show_unfinished">Show Unfinished</string>
+    <string name="text_show_finished">Show Finished</string>
+    <string name="title_no_filter">This is all of your notes</string>
+    <string name="desc_no_filter">Don\'t forget to check if you\'ve done it</string>
+
+    <string name="title_filter_finished">This is all of finished tasks</string>
+    <string name="desc_filter_finished">Uncheck if you feel it was\'nt finished</string>
+
+    <string name="title_filter_un_finished">This is all of unfinished tasks</string>
+    <string name="desc_filter_un_finished">You can do it, check it if you\'ve done it</string>
 </resources>

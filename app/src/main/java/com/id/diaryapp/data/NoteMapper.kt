@@ -4,11 +4,12 @@ import com.id.diaryapp.domain.NoteModel
 
 object NoteMapper {
     fun noteModelToEntity(q: NoteModel) = NoteEntity(
+        id = q.id,
         title = q.title,
         description = q.description,
         isNotify = q.isNotify,
         date = q.date,
-        category = q.category
+        isDone = q.isDone
     )
 
     fun noteEntityToModel(q: NoteEntity) = NoteModel(
@@ -17,6 +18,6 @@ object NoteMapper {
         description = q.description,
         isNotify = q.isNotify,
         date = q.date,
-        category = q.category
+        isDone = q.isDone
     )
 }
