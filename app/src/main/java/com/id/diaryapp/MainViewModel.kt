@@ -29,6 +29,25 @@ class MainViewModel(
         }
     }
 
+    fun updateNote(
+        note: NoteModel,
+        title: String,
+        desc: String,
+        date: Long,
+        notify: Boolean
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val newNoteModel = note.copy(
+                title = title,
+                description = desc,
+                isNotify = notify,
+                date = date,
+
+            )
+            repository.updateNote(newNoteModel)
+        }
+    }
+
     fun updateNoteStatus(
         noteModel: NoteModel
     ) {
@@ -36,7 +55,13 @@ class MainViewModel(
             val newNote = noteModel.copy(
                 isDone = !noteModel.isDone
             )
-            repository.updateDoneStatus(newNote)
+            repository.updateNote(newNote)
+        }
+    }
+
+    fun deleteNoteByID(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.removeNote(id)
         }
     }
 }

@@ -9,5 +9,5 @@ interface INoteRepository {
 
     suspend fun addNote(note: NoteModel)
     suspend fun removeNote(id: Int)
-    suspend fun updateDoneStatus(note: NoteModel)
+    suspend fun updateNote(note: NoteModel)
 }

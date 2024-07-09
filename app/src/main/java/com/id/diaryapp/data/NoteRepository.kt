@@ -32,8 +32,8 @@ class NoteRepository(
     )
 
     override suspend fun removeNote(id: Int) = noteDao.deleteNoteById(id)
-    override suspend fun updateDoneStatus(note: NoteModel) {
+    override suspend fun updateNote(note: NoteModel) {
         val noteEntity = noteModelToEntity(note)
-        noteDao.updateDoneStatus(noteEntity)
+        noteDao.updateNote(noteEntity)
     }
 }

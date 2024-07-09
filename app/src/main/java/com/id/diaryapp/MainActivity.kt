@@ -7,13 +7,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.tabs.TabLayoutMediator
 import com.id.diaryapp.databinding.ActivityMainBinding
-import com.id.diaryapp.ui.adapter.MainFragmentAdapter
+import com.id.diaryapp.domain.NoteModel
 import com.id.diaryapp.ui.adapter.RVHomeAdapter
-import com.id.diaryapp.ui.add.AddNoteDialog
-import com.id.diaryapp.ui.completed.CompletedFragment
-import com.id.diaryapp.ui.home.HomeFragment
+import com.id.diaryapp.ui.dialog.AddNoteDialog
+import com.id.diaryapp.ui.dialog.UpdateNoteDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.scope.AndroidScopeComponent
@@ -46,7 +44,9 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
             onCheckClick = {
                 viewModel.updateNoteStatus(it)
             },
-            onDetailClick = {}
+            onDetailClick = {
+                onItemClick(it)
+            }
         )
         with(binding) {
             amRvNotes.apply {
@@ -68,6 +68,24 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
         binding.amFaAdd.setOnClickListener {
             onAddButtonClick()
         }
+    }
+
+    private fun onItemClick(note: NoteModel) {
+        val dialog = UpdateNoteDialog(context = this, supportFragment = supportFragmentManager, note = note,
+            handleOnUpdateNote = { s: String, s1: String, l: Long, b: Boolean ->
+                viewModel.updateNote(
+                    note = note,
+                    title = s,
+                    desc = s1,
+                    date = l,
+                    notify = b,
+                )
+            },
+            handleOnDeleteNote = {
+                viewModel.deleteNoteByID(it)
+            }
+        )
+        dialog.show()
     }
 
     private fun onAddButtonClick() {

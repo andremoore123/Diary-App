@@ -1,4 +1,4 @@
-package com.id.diaryapp.ui.add
+package com.id.diaryapp.ui.dialog
 
 import android.content.Context
 import android.widget.Toast

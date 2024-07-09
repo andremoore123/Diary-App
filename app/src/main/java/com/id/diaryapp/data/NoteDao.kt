@@ -24,5 +24,5 @@ interface NoteDao {
     fun fetchNeedToNotifyNotes(): Flow<List<NoteEntity>>
 
     @Update
-    suspend fun updateDoneStatus(note: NoteEntity)
+    suspend fun updateNote(note: NoteEntity)
 }
