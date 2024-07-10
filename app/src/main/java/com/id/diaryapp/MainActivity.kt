@@ -1,8 +1,13 @@
 package com.id.diaryapp
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -25,6 +30,21 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModel()
     private lateinit var rvAdapter: RVHomeAdapter
+
+    private val requiredPermissions = arrayOf(
+        Manifest.permission.POST_NOTIFICATIONS,
+    )
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val deniedPermissions = permissions.filterValues { !it }.keys
+        if (deniedPermissions.isNotEmpty()) {
+            Toast.makeText(this, "Permissions denied: $deniedPermissions", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,6 +54,9 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        if (!arePermissionsGranted()) {
+            requestPermissions()
         }
 
         initView()
@@ -170,6 +193,23 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
             }
         )
         addDialog.show()
+    }
+
+    private fun arePermissionsGranted(): Boolean {
+        for (permission in requiredPermissions) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun requestPermissions() {
+        requestPermissionLauncher.launch(requiredPermissions)
     }
 
     override val scope: Scope by activityScope()

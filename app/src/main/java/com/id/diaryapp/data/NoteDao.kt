@@ -20,8 +20,8 @@ interface NoteDao {
     @Insert
     suspend fun insertNote(note: NoteEntity)
 
-    @Query("Select * from noteentity where isNotify = 1")
-    fun fetchNeedToNotifyNotes(): Flow<List<NoteEntity>>
+    @Query("SELECT * FROM noteentity WHERE date >= :startOfDay AND date < :endOfDay AND isNotify = 1")
+    fun fetchNeedToNotifyNotes(startOfDay: Long, endOfDay: Long): Flow<List<NoteEntity>>
 
     @Update
     suspend fun updateNote(note: NoteEntity)

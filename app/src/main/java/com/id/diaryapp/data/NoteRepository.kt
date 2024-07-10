@@ -21,12 +21,6 @@ class NoteRepository(
         noteEntityToModel(it)
     }
 
-    override fun fetchNeedToNotifyNotes(): Flow<List<NoteModel>> = noteDao.fetchNeedToNotifyNotes().map { noteEntities ->
-        noteEntities.map {
-            noteEntityToModel(it)
-        }
-    }
-
     override suspend fun addNote(note: NoteModel) = noteDao.insertNote(
         noteModelToEntity(note)
     )

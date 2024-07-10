@@ -21,4 +21,6 @@
 
     <string name="title_filter_un_finished">This is all of unfinished tasks</string>
     <string name="desc_filter_un_finished">You can do it, check it if you\'ve done it</string>
+    <string name="channel_name">diaryAppNotification</string>
+    <string name="channel_description">Notification to remind the user</string>
 </resources>
