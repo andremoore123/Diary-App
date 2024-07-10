@@ -38,8 +38,10 @@ class AddNoteDialog(
 
     private fun handleDatePicker() {
         datePicker.show(supportFragment, "TAG")
-        selectedDate = datePicker.selection
-        binding.anEtDate.setText(datePicker.selection?.toFormattedDateWithYear())
+        datePicker.addOnPositiveButtonClickListener { date ->
+            selectedDate = date
+            binding.anEtDate.setText(date.toFormattedDateWithYear())
+        }
     }
 
     private fun handleAddNote() {
